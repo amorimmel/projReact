@@ -2,6 +2,7 @@
     import {Typography, Box, Grid, Button} from '@material-ui/core';
     import './Home.css';
 import TabPostagem from '../../componentes/postagens/tabpostagem/TabPostagem';
+import ModalPostagem from '../../componentes/postagens/ModalPostagem/ModalPostagem';
 
     function Home() {
         return (
@@ -14,6 +15,7 @@ import TabPostagem from '../../componentes/postagens/tabpostagem/TabPostagem';
                         </Box>
                         <Box display="flex" justifyContent="center">
                             <Box marginRight={1}>
+                            <ModalPostagem />
                             </Box>
                             <Button variant="outlined" className='botao'>Ver Postagens</Button>
                         </Box>
