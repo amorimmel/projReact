@@ -5,10 +5,13 @@
     import { login } from '../../services/Service';
     import UserLogin from '../../models/Userlogin';
     import './Login.css';
-
+    import { useDispatch } from 'react-redux';
+    import { addToken } from "../../store/tokens/actions";
+    
     function Login() {
         let history = useHistory();
-        const [token, setToken] = useLocalStorage('token');
+        const dispatch = useDispatch();
+        const [token, setToken] = useState('');
         const [userLogin, setUserLogin] = useState<UserLogin>(
             {
                 id: 0,
@@ -17,32 +20,33 @@
                 token: ''
             }
             )
-
+    
             function updatedModel(e: ChangeEvent<HTMLInputElement>) {
-
+    
                 setUserLogin({
                     ...userLogin,
                     [e.target.name]: e.target.value
                 })
             }
-
+    
                 useEffect(()=>{
                     if(token != ''){
+                        dispatch(addToken(token));
                         history.push('/home')
                     }
                 }, [token])
-
+    
             async function onSubmit(e: ChangeEvent<HTMLFormElement>){
                 e.preventDefault();
                 try{
-                    await login (`/usuarios/logar`, userLogin, setToken)
-
+                    await login(`/usuarios/logar`, userLogin, setToken)
+    
                     alert('Usuário logado com sucesso!');
                 }catch(error){
                     alert('Dados do usuário inconsistentes. Erro ao logar!');
                 }
             }
-
+    
         return (
             <Grid container direction='row' justifyContent='center' alignItems='center'>
                 <Grid alignItems='center' xs={6}>
@@ -69,10 +73,10 @@
                     </Box>
                 </Grid>
                 <Grid xs={6} className='imagem'>
-
+    
                 </Grid>
             </Grid>
         );
     }
-
+    
     export default Login;

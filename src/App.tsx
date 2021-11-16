@@ -12,11 +12,14 @@ import CadastroTema from './componentes/temas/CadastroTema/CadastroTema';
 import DeletarPostagem from './componentes/postagens/DeletarPostagem/DeletarPostagem';
 import DeletarTema from './componentes/temas/DeletarTema/DeletarTema';
 import CadastroPost from './componentes/postagens/cadastroPost/CadastroPost';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 
 
   function App() {
     return (
+      <Provider store={store}>
       <Router>
         <Navbar />
           <Switch>
@@ -64,14 +67,13 @@ import CadastroPost from './componentes/postagens/cadastroPost/CadastroPost';
             <Route path='/deletarTema/:id'>
               <DeletarTema />
             </Route>
-
-
-
+            
             </div>
-          </Switch>
-        <Footer />
-      </Router>
-    );
-  }
+      </Switch>
+      <Footer />
+    </Router>
+    </Provider>
+  );
+}
 
-  export default App;
+export default App;
