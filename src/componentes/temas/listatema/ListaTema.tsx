@@ -75,7 +75,7 @@ import { TokenState } from '../../../store/tokens/tokensReducer';
         }
         </>
     );
-    }
+}
 
 
 export default ListaTema;
