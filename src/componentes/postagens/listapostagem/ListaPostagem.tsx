@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import Postagem from '../../../models/Postagem';
-import { busca } from '../../../services/Service'
-import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
-import './ListaPostagem.css';
-import { useHistory } from 'react-router-dom'
-import { useSelector } from 'react-redux';
-import { TokenState } from '../../../store/tokens/tokensReducer';
+    import React, { useState, useEffect } from 'react'
+    import { Link } from 'react-router-dom'
+    import Postagem from '../../../models/Postagem';
+    import { busca } from '../../../services/Service'
+    import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
+    import './ListaPostagem.css';
+    import { useHistory } from 'react-router-dom'
+    import { useSelector } from 'react-redux';
+    import { TokenState } from '../../../store/tokens/tokensReducer';
+    import { toast } from 'react-toastify';
 
-function ListaPostagem() {
+    function ListaPostagem() {
     const [posts, setPosts] = useState<Postagem[]>([])
     let history = useHistory();
     const token = useSelector<TokenState, TokenState["tokens"]>(
@@ -17,7 +18,16 @@ function ListaPostagem() {
 
     useEffect(() => {
         if (token == "") {
-        alert("Você precisa estar logado")
+        toast.error('Você precisa estar logado', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            theme: "colored",
+            progress: undefined,
+        });
         history.push("/login")
 
         }
@@ -84,4 +94,4 @@ function ListaPostagem() {
     )
     }
 
-export default ListaPostagem;
+    export default ListaPostagem;
